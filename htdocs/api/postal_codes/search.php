@@ -4,11 +4,11 @@ $result = array();
 
 // GET Parameter Check
 if (!isset($_GET['code'])) {
-    //http_response_code(400);
-    $result = array('error' => 'Get Parameter is Invalid', 'http_code' => '400');
+    http_response_code(400);
+    $result = array('error' => 'Get Parameter is Invalid');
 } elseif(!preg_match("/^\d{7}$/", $_GET['code'])) {
-    //http_response_code(400);
-    $result = array('error' => 'Postal Code is Invalid', 'http_code' => '400');
+    http_response_code(400);
+    $result = array('error' => 'Postal Code is Invalid');
 } else {
     // Address Search
     $code = $_GET['code'];
