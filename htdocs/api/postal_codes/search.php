@@ -11,7 +11,6 @@ if (!isset($_GET['code'])) {
     $result = array('error' => 'Postal Code is Invalid', 'http_code' => '400');
 } else {
     // Address Search
-    $result = array();
     $code = $_GET['code'];
     $file = $dir . DIRECTORY_SEPARATOR . substr($code, 0, 1) . '.csv';
     if(file_exists($file)) {
