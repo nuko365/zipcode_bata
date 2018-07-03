@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#search').on('click',function(){
+            var code = $.trim($('#code').val());
+            $.ajax({
+                url:'./search',
+                type:'GET',
+                data: {'code': code},
+                dataType: 'json',
+                scriptCharset: 'utf-8'
+            })
+            // Ajaxリクエスト成功
+            .done((data) => {
+                if(!Object.keys(data).length){
+                    alert('見つかりませんでした。');
+                } else {
+                    $('#address').val(data['prefecture'] + data['city'] + data['address_line']);
+                }
+            })
+            // Ajaxリクエスト失敗
+            .fail((data) => {
+                alert('Ajaxエラーです。');
+            })
+        });
+        $('#clear').on('click',function(){
+            $('#code').val('');
+            $('#address').val('');
+        });
+    });
+</script>
+<title>住所検索（郵便番号）</title>
+</head>
+<body>
+<p>郵便番号から住所を検索できます。郵便番号を入力後「検索」ボタンを押して下さい。</p>
+<form>
+    <p>郵便番号-><input type="text" name="code" id="code" size="7" value="1010051">
+    <input type="button" id="search" value="検索">
+    <input type="button" id="clear" value="クリア">
+    </p>
+    <p>住所　　-><input size="50" type="text" name="address" id="address"></p>
+</form>
+</body>
+</html>
