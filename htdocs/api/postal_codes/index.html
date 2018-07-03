@@ -11,9 +11,10 @@ $(document).ready(function(){
         var zip1 = $.trim($('#zip1').val());
         var zip2 = $.trim($('#zip2').val());
         var zipcode = zip1 + zip2;
+        alert(zipcode);
  
         $.ajax({
-            type: "post",
+            type: "GET",
             url: "api.php",
             data: JSON.stringify(zipcode),
             crossDomain: false,
@@ -34,7 +35,7 @@ $(document).ready(function(){
 </head>
 <body>
 <form>
-    <p><input type="text" name="zip1" id="zip1" size="6">-<input type="text" name="zip2" id="zip2" size="6">
+    <p><input type="text" name="zip1" id="zip1" size="6" value="330">-<input type="text" name="zip2" id="zip2" size="6"  value="0064">
     <input type="button" id="lookup" value="Lookup address"></p>
     <p><input size="50" type="text" name="address" id="address"></p>
 </form>
