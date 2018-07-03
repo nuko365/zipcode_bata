@@ -14,7 +14,7 @@
                 dataType: 'json',
                 scriptCharset: 'utf-8'
             })
-            // Ajaxリクエスト成功
+            // 成功
             .done((data) => {
                 if(!Object.keys(data).length){
                     alert('見つかりませんでした。');
@@ -22,27 +22,32 @@
                     $('#address').val(data['prefecture'] + data['city'] + data['address_line']);
                 }
             })
-            // Ajaxリクエスト失敗
-            .fail((data) => {
-                alert('Ajaxエラーです。');
+            // 失敗
+            .fail((jqXHR, textStatus, errorThrown) => {
+                alert(jqXHR.responseText);
+                //alert("(" + jqXHR.status + ")" + jqXHR.responseText);
             })
         });
         $('#clear').on('click',function(){
             $('#code').val('');
             $('#address').val('');
         });
+        $('#reload').on('click',function(){
+            location.reload();
+        });
     });
 </script>
 <title>住所検索（郵便番号）</title>
 </head>
 <body>
-<p>郵便番号から住所を検索できます。郵便番号を入力後「検索」ボタンを押して下さい。</p>
+<p>郵便番号から住所を検索できます。</p>
 <form>
-    <p>郵便番号-><input type="text" name="code" id="code" size="7" value="1010051">
+    <p>郵便番号-> <input type="text" name="code" id="code" size="7" value="1010051">
     <input type="button" id="search" value="検索">
-    <input type="button" id="clear" value="クリア">
+    <input type="button" id="clear" value="クリア（郵便番号・住所）">
+    <input type="button" id="reload" value="ページ更新">
     </p>
-    <p>住所　　-><input size="50" type="text" name="address" id="address"></p>
+    <p>住所　　-> <input size="50" type="text" name="address" id="address"></p>
 </form>
 </body>
 </html>
